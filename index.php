@@ -17,6 +17,10 @@ define('IS_GET', REQUEST_METHOD == 'GET' ? true : false);
 define('IS_POST', REQUEST_METHOD == 'POST' ? true : false);
 $ruleList = explode('/', rtrim(NOW_URL, '$'));
 $name = end($ruleList);
+if ($name =='phpinfo'){
+    phpinfo();
+    exit();
+}
 $file = 'leetcode/'.$name.'.php';
 if (is_file($file)){
     include $file;

@@ -6,10 +6,13 @@
  * Time: 17:17
  */
 //两数之和
-include_once('../function.php');
 
-
-function num_and($arr,$num){
+/**
+ * @param $arr
+ * @param $num
+ * @return array
+ */
+function num_and($arr, $num){
     for ($i=0;$i<count($arr);$i++){
         $target = $num-$arr[$i];
         for ($j=$i+1;$j<count($arr);$j++){
