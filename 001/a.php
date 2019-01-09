@@ -89,3 +89,4 @@ echo '<hr>';
 $head->showNode($head);
 
 //添加一条信息.
+//添加一条信息.
