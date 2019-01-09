@@ -88,4 +88,4 @@ echo '<hr>';
 //遍历
 $head->showNode($head);
 
-
+//添加一条信息.
