@@ -9,7 +9,7 @@
 
 
 //存在重复
-$a = [1,2,3,4];
+$a = [3,1];
 function array_repeat($arr){
     $b = [];
     foreach ($arr as $key=>$value){

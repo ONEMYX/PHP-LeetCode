@@ -22,6 +22,7 @@ function array_intersect_ex($a,$b){
     foreach ($a as $key=>$value){
         if (in_array($a[$key],$b)){
             $c[]=$a[$key];
+            unset($b[$key]);
         }
     }
     return $c;
@@ -29,6 +30,6 @@ function array_intersect_ex($a,$b){
 
 
 
-$nums1 = [2,2];
-$nums2 = [1,2,2,1];
+$nums1 = [3,1,2];
+$nums2 = [1,1];
 array_intersects($nums1,$nums2);
