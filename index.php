@@ -23,7 +23,7 @@ if ($name =='phpinfo'){
 }
 $file = 'leetcode/'.$name.'.php';
 if (is_file($file)){
-    include $file;
+    include_once $file;
 }elseif(!$name){
     echo '没有此文件';
 }else{

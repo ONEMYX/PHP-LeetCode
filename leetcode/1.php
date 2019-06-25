@@ -23,6 +23,31 @@ function num_and($arr, $num){
     }
 }
 
+class Solution {
+
+    /**
+     * @param Integer[] $nums
+     * @param Integer $target
+     * @return Integer[]
+     */
+    function twoSum($nums, $target) {
+        return $this->num_and($nums,$target);
+    }
+    function num_and($arr, $num){
+        $len =count($arr);
+        for ($i=0;$i<$len;$i++){
+            $target = $num-$arr[$i];
+            for ($j=$i+1;$j<$len;$j++){
+                if ($arr[$j]==$target){
+                    return [$i,$j];
+                }
+            }
+        }
+    }
+}
+
 $arr = [2, 7, 11, 15];
 $num = 9;
-p(num_and($arr,$num));
+$adn = new Solution();
+//p(num_and($arr,$num));
+var_dump($adn->twoSum($arr,$num));

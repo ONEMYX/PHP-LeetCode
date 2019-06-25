@@ -6,7 +6,7 @@
  * Time: 19:51
  */
 //有效的数独
-include('../function.php');
+//include('../function.php');
 
 class Sudoku{
     function suDo($arr)
@@ -107,7 +107,86 @@ class Sudoku{
     }
 }
 
+class Solution {
 
+    /**
+     * @param String[][] $board
+     * @return Boolean
+     */
+    function isValidSudoku($board) {
+        return $this->suDo_one($board);
+    }
+    function suDo_one($arr){
+        //取出 所有数字 存下 位置
+        //取出 相同数字之间的位置 是否满足数独的条件
+        $data =[];
+        foreach ($arr as $key =>$item){
+            foreach ($item as $k =>$value){
+                if (is_numeric($value)){
+                    $data[$value][]=[
+                        'one'=>$key,
+                        'two'=>$k,
+                    ];
+                }
+            }
+        }
+        unset($key,$item);
+        foreach ($data as $key=>$item){
+            $type= $this->one($item);
+            if (!$type){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function one($item){
+        $arr = array_column($item,'one');
+        if (count($arr) != count(array_unique($arr))) {
+            return false;
+        }else{
+            return $this->two($item);
+        }
+    }
+    function two($item){
+        $arr = array_column($item,'two');
+        if (count($arr) != count(array_unique($arr))) {
+            return false;
+        }else{
+            return $this->three($item);
+        }
+    }
+    function three($item){
+        $data = [];
+        foreach ($item as $value){
+            $num =$this->panduan($value);
+            if (in_array($num,$data)){
+                return false;
+            }
+            $data[]=$num;
+        }
+        return true;
+    }
+    function panduan($item){
+        $one =$item['one'];
+        $two = $item['two'];
+        for ($i=0;$i<3;$i++){
+            $x=$i*3;
+            $y=$x+2;
+            if ($one>=$x&&$one<=$y){
+                for ($j=0;$j<3;$j++){
+                    $min = $j*3;
+                    $max = $min+2;
+                    if ($two>=$min&&$two<=$max){
+                        return $x+$j;
+                    }
+                }
+            }
+        }
+    }
+
+
+}
 
 $a = [
     ["5","3",".",".","7",".",".",".","."],
@@ -120,9 +199,9 @@ $a = [
     [".",".",".","4","1","9",".",".","5"],
     [".",".",".",".","8",".",".","7","9"]
 ];
-$suDo = new Sudoku();
-$b = $suDo->suDo($a);
-p($b);
+$suDo = new Solution();
+$b = $suDo->isValidSudoku($a);
+var_dump($b);
 
 
 
