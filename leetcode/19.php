@@ -7,15 +7,31 @@
  */
 //删除链表的倒数第N个节点
 
-include ('../function.php');
-class Nodes extends Node{
+/**
+ * Definition for a singly-linked list.
+ * class ListNode {
+ *     public $val = 0;
+ *     public $next = null;
+ *     function __construct($val) { $this->val = $val; }
+ * }
+ */
+class Solution {
 
+    /**
+     * @param ListNode $head
+     * @param Integer $n
+     * @return ListNode
+     */
+    function removeNthFromEnd($head, $n) {
+
+        $count = count($head);
+        unset($head[$count-$n]);
+        return $head;
+    }
 }
 
-$data = new  Nodes(null);
-$a = ['1','2','3','4'];
-$data->addNode($data,$a);
-$data->showNode($data);
-echo '<hr>';
-$data->undelNode($data,4);
-$data->showNode($data);
+$t = [1,2,3,4,5];
+$n = 2;
+$solu = new Solution();
+$B    = $solu->removeNthFromEnd($t,$n);
+var_dump($B);
