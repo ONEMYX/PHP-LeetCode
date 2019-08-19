@@ -8,7 +8,7 @@
 
 //入口文件
 include_once ('function.php');
-
+//echo phpinfo();
 defined('CONF_EXT') or define('CONF_EXT', '.php');
 define('NOW_URL', $_SERVER['REQUEST_URI']);
 define('REQUEST_METHOD', $_SERVER['REQUEST_METHOD']) or define('REQUEST_METHOD','NOT');
