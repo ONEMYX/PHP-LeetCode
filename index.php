@@ -6,6 +6,7 @@
  * Time: 16:30
  */
 
+//echo phpinfo();die();
 //入口文件
 include_once ('function.php');
 //echo phpinfo();
@@ -15,7 +16,8 @@ define('REQUEST_METHOD', $_SERVER['REQUEST_METHOD']) or define('REQUEST_METHOD',
 define('HTTP_REFERER', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
 define('IS_GET', REQUEST_METHOD == 'GET' ? true : false);
 define('IS_POST', REQUEST_METHOD == 'POST' ? true : false);
-$ruleList = explode('/', rtrim(NOW_URL, '$'));
+define('HTTP_URL',$_SERVER['DOCUMENT_URI']);
+$ruleList = explode('/', rtrim(HTTP_URL, '$'));
 $name = end($ruleList);
 if ($name =='phpinfo'){
     phpinfo();
