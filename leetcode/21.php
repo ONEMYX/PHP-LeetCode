@@ -5,35 +5,57 @@
  * Date: 2018/12/3
  * Time: 17:25
  */
-include ('../function.php');
-class nodes extends Node{
-    public function andNode($node,$data)
-    {
-        $cur = $node;
-        $sout = $data;
-        while(!is_null($cur->next)){
-            $cur = $cur->next;
-        }
-        while (!is_null($sout->next)){
-            $cur->next = $sout->next;
-            $cur = $cur->next;
-            $sout = $sout->next;
-        }
 
+/**
+ * Definition for a singly-linked list.
+ * class ListNode {
+ *     public $val = 0;
+ *     public $next = null;
+ *     function __construct($val) { $this->val = $val; }
+ * }
+ */
+class ListNode
+{
+    public $val  = 0;
+    public $next = null;
+
+    function __construct($val)
+    {
+        $this->val = $val;
     }
 }
-$data = new  nodes(null);
-$a = ['11','22','33','44'];
-$data->addNode($data,$a);
-$data->showNode($data);
-echo '<hr>';
-$node = new  nodes(null);
-$a = ['aa','bb','cc','dd'];
-$node->addNode($node,$a);
-$node->showNode($node);
-echo '<hr>';
-$node->andNode($node,$data);
-$node->showNode($node);
-echo '<hr>';
+
+class Solution
+{
+
+    /**
+     * @param ListNode $l1
+     * @param ListNode $l2
+     *
+     * @return ListNode
+     */
+    function mergeTwoLists($l1, $l2)
+    {
+        if ($l1->val>$l2->val){
+
+        }
+    }
+}
+
+
+$a       = new ListNode( 1 );
+$b       = new ListNode( 2 );
+$c       = new ListNode( 3 );
+$b->next = $c;
+$a->next = $b;
+var_dump( $a );
+$aa       = new ListNode( 1 );
+$b        = new ListNode( 3 );
+$c        = new ListNode( 4 );
+$b->next  = $c;
+$aa->next = $b;
+var_dump( $aa );
+$solution = new Solution();
+$solution->mergeTwoLists( $a, $aa );
 
 
