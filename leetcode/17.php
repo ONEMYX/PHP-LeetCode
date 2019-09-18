@@ -21,15 +21,15 @@ class Solution
     function letterCombinations($digits)
     {
         $len = strlen( $digits );
-        if ($len < 1) {
-            return [];
-        }
-        if ($len <= 1) {
-            return $this->size[$digits];
-        }
+        if ($len < 1) return [];
+
+        if ($len <= 1) return $this->size[$digits];
+
         $arr  = [];
         $str  = substr( $digits, 1 );
+
         $temp = $this->letterCombinations( $str );
+
         foreach ($this->size[$digits{0}] as $key => $value) {
             foreach ($temp as $tem) {
                 $arr[] = $value . $tem;
