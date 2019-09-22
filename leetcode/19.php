@@ -38,21 +38,19 @@ class Solution
      */
     function removeNthFromEnd($head, $n)
     {
-        $list = new ListNode('head');
-        $list->next = $head;
-        $size =$n+1;
-        for ($i=0;$i<$size;$i++){
-            $temp = isset($temp)?$temp->next:$list->next;
+        $dummy = new ListNode(0);
+        $dummy->next = $head;
+        $ptr1 = $dummy;
+        $ptr2 = $dummy;
+        for($i=0;$i<$n+1;$i++){
+            $ptr1 = $ptr1->next;
         }
-        $end = $temp->next;
-        while ($end){
-
-            $end = $temp = $temp->next;
-            $status = isset($status)?$status->next:$list->next;
+        while($ptr1!=null){
+            $ptr1 = $ptr1->next;
+            $ptr2 = $ptr2->next;
         }
-        $data =$status->next->next;
-        $status->next =$data;
-        var_dump($status);exit();
+        $ptr2->next = $ptr2->next->next;
+        return $dummy->next;
 
     }
 }
@@ -71,4 +69,4 @@ $c->next = $d;
 $d->next = $e;
 $n=2;
 $B = $solu->removeNthFromEnd($a, $n);
-var_dump($B);
+print_r($B);
