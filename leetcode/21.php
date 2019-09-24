@@ -58,6 +58,35 @@ class Solution
         }
         return $dummy->next;
     }
+
+    /**
+     * 遍历两个链表 进行排序
+     *
+     * @param $l1
+     * @param $l2
+     *
+     * @return null
+     */
+    function one($l1, $l2){
+        $temp = [];
+        while ($l1){
+            $temp[]=$l1->val;
+            $l1 = $l1->next;
+        }
+        while ($l2){
+            $temp[] = $l2->val;
+            $l2 = $l2->next;
+        }
+        sort($temp);
+        $list = new ListNode(-1);
+        $p =$list;
+        foreach ($temp as $value){
+            $size = new ListNode($value);
+            $p->next =$size;
+            $p=$p->next;
+        }
+        return $list->next;
+    }
 }
 
 
@@ -74,7 +103,7 @@ $b->next  = $c;
 $aa->next = $b;
 var_dump( $aa );
 $solution = new Solution();
-$list     = $solution->mergeTwoLists( $a, $aa );
+$list     = $solution->one( $a, $aa );
 print_r( $list );
 
 
