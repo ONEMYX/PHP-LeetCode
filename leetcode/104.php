@@ -36,6 +36,15 @@ class Solution
     {
         return $root === null ? 0 : max( $this->one( $root->left ), $this->one( $root->right ) ) + 1;
     }
+
+    function two($root){
+        if (!$root){
+            return 0;
+        }
+        $left  = $this->maxDepth( $root->left );
+        $right = $this->maxDepth( $root->right );
+        return max($left,$right)+1;
+    }
 }
 
 $a        = new TreeNode( 3 );
