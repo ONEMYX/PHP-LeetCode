@@ -31,8 +31,10 @@ class Solution
         $right = $this->maxDepth( $root->right, $temp );
         return max( $left, $right );
     }
-    function one($root){
-        return $root===null?0:max($this->one($root->left),$this->one($root->right))+1;
+
+    function one($root)
+    {
+        return $root === null ? 0 : max( $this->one( $root->left ), $this->one( $root->right ) ) + 1;
     }
 }
 
@@ -43,5 +45,5 @@ $b->left  = new TreeNode( 15 );
 $b->right = new TreeNode( 7 );
 $a->right = $b;
 $Solution = new Solution();
-$aa       = $Solution->one( $a);
+$aa       = $Solution->one( $a );
 var_dump( $aa );
