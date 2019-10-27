@@ -3,10 +3,7 @@
 class Solution
 {
     private $queue = [];
-    private $queueTwo = [];
     private $rooms;
-    private $status = false;
-    private $log = [];
 
     /**
      * @param Integer[][] $rooms
@@ -17,68 +14,55 @@ class Solution
         $this->rooms = $rooms;
         foreach ($rooms as $key => $value) {
             foreach ($value as $k => $item) {
-                if ($item != 2147483647) {
-                    continue;
+                if ($rooms[$key][$k] == 0) {
+                    $this->dfs($key, $k, 0);
                 }
+            }
+        }
+        $rooms = $this->rooms;
+    }
+
+    function dfs($key, $k, $val)
+    {
+        if ($key < 0 || $key >= count($this->rooms) || $k < 0 || $k > count($this->rooms[$key]) || @$this->rooms[$key][$k] < $val)
+            return;
+        $this->rooms[$key][$k] = $val;
+        $this->dfs($key + 1, $k, $val + 1);
+        $this->dfs($key - 1, $k, $val + 1);
+        $this->dfs($key, $k + 1, $val + 1);
+        $this->dfs($key, $k - 1, $val + 1);
+    }
+
+    function bfs(&$rooms)
+    {
+        foreach ($rooms as $key => $value) {
+            foreach ($value as $k => $item) {
+                if ($rooms[$key][$k] == 0) {
+                    $this->queue[] = [$key, $k];
+                }
+            }
+        }
+        while (!empty($this->queue)) {
+            $i = end($this->queue)[0];
+            $j = end($this->queue)[1];
+            array_pop($this->queue);
+            $arr = [
+                [$i - 1, $j],
+                [$i + 1, $j],
+                [$i, $j - 1],
+                [$i, $j + 1],
+            ];
+            foreach ($arr as $item) {
+                $key = reset($item);
+                $k = end($item);
+                if ($key < 0 || $key >= count($rooms) || $k < 0 || $k > count($rooms[0]) || @$rooms[$key][$k] < $rooms[$i][$j] + 1)
+                    continue;
+                $rooms[$key][$k] = $rooms[$i][$j] + 1;
                 $this->queue[] = [$key, $k];
-                $this->log = $this->queue;
-                $rooms[$key][$k] = $this->find($key, $k);
             }
         }
     }
 
-    function find($key, $k)
-    {
-        $num = 0;
-        // 判断它是否有节点如果有并不是0放入队列。
-        while (!$this->status) {
-            $num++;
-            //查找入队
-            foreach ($this->queue as $value) {
-                $this->one($value[0], $value[1]);
-            }
-            if ($this->status) {
-                $this->queue = [];
-                $this->queueTwo = [];
-                $this->status = false;
-                return $num;
-            }
-            if (empty($this->queueTwo)) {
-                $this->queue = [];
-                return 2147483647;
-            } else {
-                $this->log = array_merge($this->log, $this->queue);
-                $this->queue = $this->queueTwo;
-                $this->queueTwo = [];
-            }
-        }
-    }
-
-    function one($key, $k)
-    {
-        $arr = [
-            [$key - 1, $k],
-            [$key + 1, $k],
-            [$key, $k - 1],
-            [$key, $k + 1],
-        ];
-        foreach ($arr as $value) {
-            if (!in_array($value, $this->log)) {
-                $this->oneCheck($value[0], $value[1]);
-            }
-        }
-    }
-
-    function oneCheck($key, $k)
-    {
-        if (isset($this->rooms[$key][$k])) {
-            if ($this->rooms[$key][$k] == '0') {
-                $this->status = true;
-            } elseif ($this->rooms[$key][$k] == 2147483647) {
-                $this->queueTwo[] = [$key, $k];
-            }
-        }
-    }
 }
 
 $rooms = [
@@ -87,10 +71,11 @@ $rooms = [
     [2147483647, -1, 2147483647, -1],
     [0, -1, 2147483647, 2147483647],
 ];
-$rooms = [[2147483647, 2147483647], [2147483647, 2147483647]];
+//$rooms = [[2147483647, 2147483647], [2147483647, 2147483647]];
 
 
 $Solution = new Solution();
-$Solution->wallsAndGates($rooms);
+//$Solution->wallsAndGates($rooms);
+$Solution->bfs($rooms);
 
 var_dump($rooms);
