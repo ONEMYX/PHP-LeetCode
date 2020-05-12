@@ -11,88 +11,61 @@
 /**
  * Class Stack
  */
-class Stack{
-    /**
-     * @var int
-     */
-    protected $maxSize = 10;
-    /**
-     * @var array
-     */
-    protected $arr = [];
-    /**
-     * @var int
-     */
-    protected $top = -1;
-    /**
-     * @var
-     */
-    protected $out;
+class MinStack
+{
+    private $arr = [];
+    private $min = [];
 
-    /** 添加到栈
-     *
-     * @param $string
-     * @return string
+    /**
+     * initialize your data structure here.
      */
-    public function push($string)
+    function __construct()
     {
-        if ($this->top >= $this->maxSize){
-            return 'error';
-        }
-        ++$this->top;
-        $this->arr[$this->top] = $string;
-        $this->outPut();
+
     }
 
-    /** 删除最顶
-     *
-     * @return string
+    /**
+     * @param Integer $x
+     * @return NULL
      */
-    public function pop()
+    function push($x)
     {
-        if ($this->top<0)
-            return 'error';
-        $this->out = $this->arr[$this->top];
-        unset($this->arr[$this->top]);
-        --$this->top;
-        echo $this->out;
-        unset($this->out);
-    }
-
-    /** 获取栈顶元素
-     *
-     * @return string
-     */
-    public function top(){
-        if ($this->top<0)
-            return 'error';
-        $this->out = $this->arr[$this->top];
-        return $this->out;
-    }
-
-    /** 获取最小元素
-     *
-     */
-    public function getMin(){
-        if ($this->top < 0 )
-            return 'error';
-        $min = $this->arr[0];
-        for ($i=1;$i<=$this->top;$i++){
-            if ($this->arr[$i]<$min){
-                $min = $this->arr[$i];
-            }
+        $this->arr[] = $x;
+        $minNum = end($this->min);
+        if (!isset($this->min[0]) || $minNum > $x) {
+            $this->min[] = $x;
+        } else {
+            $this->min[] = $minNum;
         }
-        return $min;
     }
 
-    /** 显示 栈的所有元素
-     *
+    /**
+     * @return NULL
      */
-    public function outPut(){
-        Dump($this->arr);
+    function pop()
+    {
+        array_pop($this->arr);
+        array_pop($this->min);
+    }
+
+    /**
+     * @return Integer
+     */
+    function top()
+    {
+        return end($this->arr);
+    }
+
+    /**
+     * @return Integer
+     */
+    function getMin()
+    {
+        return end($this->min);
     }
 }
-$Stack = new Stack();
+
+$Stack = new MinStack();
 $Stack->push(2);
 $Stack->push(1);
 $Stack->push(3);
@@ -107,4 +80,4 @@ $Stack->push(-9);
 //$Stack->outPut();
 $b = $Stack->top();
 $a = $Stack->getMin();
-Dump($b);
+var_dump($b);
